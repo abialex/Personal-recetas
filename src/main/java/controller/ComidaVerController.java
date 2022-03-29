@@ -282,6 +282,14 @@ public class ComidaVerController implements Initializable {
         imag.setImage(new Image(getClass().getResource("/imagenes/inventario-1.png").toExternalForm()));
     }
 
+    @FXML
+    void mostrarAgregar() {
+        ComidaAgregarController oComidaAgregarController = (ComidaAgregarController) mostrarVentana(ComidaAgregarController.class, "ComidaAgregar");
+        oComidaAgregarController.setController(odc);
+        lockedPantalla();
+
+    }
+
     public Object mostrarVentana(Class generico, String nameFXML) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(generico.getResource(nameFXML + ".fxml"));

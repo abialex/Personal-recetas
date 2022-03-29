@@ -52,7 +52,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseExited="#imagAddFuera" onMouseMoved="#imagAddMoved" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseClicked="#mostrarAgregar" onMouseExited="#imagAddFuera" onMouseMoved="#imagAddMoved" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                            <image>
                               <Image url="@../imagenes/add-1.png" />
                            </image>

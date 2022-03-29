@@ -29,7 +29,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -44,6 +47,9 @@ public class ComidaAgregarController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private AnchorPane ap;
+    
     @FXML
     private JFXComboBox<Ingrediente> jcbIngrediente;
 
@@ -70,6 +76,7 @@ public class ComidaAgregarController implements Initializable {
 
     ObservableList<PlatoIngrediente> listPlatoIngrediente = FXCollections.observableArrayList();
     AutoCompletionBinding<Ingrediente> autoComplete;
+    ComidaVerController oComidaVerController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -319,6 +326,17 @@ public class ComidaAgregarController implements Initializable {
         jcbIngrediente.getSelectionModel().select(null);
         jtfcantidad.setText("");
         jtfund.setText("");
+    }
+    /* necesario en las ventanas */
+    void setController(ComidaVerController odc) {
+        this.oComidaVerController = odc;
+        ap.getScene().getWindow().addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event -> cerrar());
+    }
+
+    @FXML
+    void cerrar() {
+        oComidaVerController.lockedPantalla();
+        ((Stage) ap.getScene().getWindow()).close();
     }
 
 }
