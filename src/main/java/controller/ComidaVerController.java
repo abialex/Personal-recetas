@@ -193,23 +193,20 @@ public class ComidaVerController implements Initializable {
                 }
 
                 void mostrarImprimir(MouseEvent event) {
-                    /*
                     ImageView imag = (ImageView) event.getSource();
                     for (int i = 0; i < listPlato.size(); i++) {
-                        if (listPlato.get(i).getIdpersona() == (Integer) imag.getUserData()) {
+                        if (listPlato.get(i).getId() == (Integer) imag.getUserData()) {
                             try {
-                                Persona opersona = listPlato.get(i);
-
-                                HistoriaclinicaSimplepdf.ImprimirHistoriaClinica(opersona);
-                                File file = new File("pdf\\historia_clinica.pdf");
+                                Plato oplato = listPlato.get(i);
+                                HistoriaclinicaSimplepdf.ImprimirReceta(oplato);
+                                File file = new File("pdf\\receta.pdf");
                                 Desktop.getDesktop().open(file);
-
                                 break;
                             } catch (IOException ex) {
-                                Logger.getLogger(VerPacienteController.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
                             }
                         }
-                    }*/
+                    }
                 }
 
                 private void imagEliminarMoved(MouseEvent event) {
