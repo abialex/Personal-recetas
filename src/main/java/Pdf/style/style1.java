@@ -148,7 +148,7 @@ public class style1 implements IEventHandler {
         Style styleTextCenter = new Style().setTextAlignment(TextAlignment.CENTER).setFontSize(10f);
         /*--- tabla en cabezado ---*/
         Image img = null;
-        try {
+        /*try {
             img = new Image(ImageDataFactory.create("images\\sanluisimag.jpg"));
         } catch (MalformedURLException ex) {
             Logger.getLogger(style1.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,7 +156,7 @@ public class style1 implements IEventHandler {
         Table tabla_encabezado = new Table(new float[]{volumen * 1, volumen * 4});
 
         Cell cell = new Cell().add(img.setAutoScale(true)).setBorder(Border.NO_BORDER);
-        /*new SolidBorder(Color.BLACK,1*/
+        /*new SolidBorder(Color.BLACK,1
         tabla_encabezado.addCell(cell).addStyle(styleCell).setTextAlignment(TextAlignment.LEFT);
         PdfFont bold = null;
         try {
@@ -169,7 +169,7 @@ public class style1 implements IEventHandler {
                 // .add(new Paragraph(new Date().toString()))
                 .addStyle(styleText).addStyle(styleCell)
                 .setBorder(Border.NO_BORDER);
-        tabla_encabezado.addCell(cell);
+        tabla_encabezado.addCell(cell);*/
         //canvasEncabezado.add(tabla_encabezado);
 
         Table tablaNumeracion = this.crearTablaPie(docEvent);
@@ -185,11 +185,8 @@ public class style1 implements IEventHandler {
         TablePie.addCell(new Cell().add(TablePie1).setMarginLeft(70).addStyle(styleCell));
         TablePie.addCell(new Cell().add(TablePie2).setMarginLeft(70).addStyle(styleCell));
         pag++;
-        if (pag == 2) {
-            canvasPie.add(TablePie);
-        } else {
-            canvasPie.add(new Paragraph(pag + "").setTextAlignment(TextAlignment.RIGHT));
-        }
+        //canvasPie.add(TablePie);
+        canvasPie.add(new Paragraph(pag + "").setTextAlignment(TextAlignment.RIGHT));
     }
 
 }
