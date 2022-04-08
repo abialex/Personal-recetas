@@ -92,6 +92,9 @@ public class ComidaVerController implements Initializable {
     void cargarTipo() {
         ObservableList<Tipo> TIPO = FXCollections.observableArrayList();
         List<Tipo> list = App.jpa.createQuery("select p from Tipo p").getResultList();
+        Tipo otipo = new Tipo("NINGUNO");
+        TIPO.add(otipo);
+        jcbTipo.getSelectionModel().select(otipo);
         for (Tipo tipo : list) {
             TIPO.add(tipo);
         }
@@ -101,7 +104,8 @@ public class ComidaVerController implements Initializable {
 
     @FXML
     void updateListPlato() {
-        List<Plato> olistPlato = App.jpa.createQuery("select p from Plato p where nombre like " + "'%" + jtfPlato.getText() + "%'" + " order by id DESC").setMaxResults(10).getResultList();
+        String tipo = jcbTipo.getSelectionModel().getSelectedItem().getNombre().equals("NINGUNO") ? "" : "and idtipo = " + jcbTipo.getSelectionModel().getSelectedItem().getId();
+        List<Plato> olistPlato = App.jpa.createQuery("select p from Plato p where nombre like " + "'%" + jtfPlato.getText() + "%' " + tipo + " order by id DESC").setMaxResults(10).getResultList();
         listPlato.clear();
         for (Plato ocarta : olistPlato) {
             listPlato.add(ocarta);
