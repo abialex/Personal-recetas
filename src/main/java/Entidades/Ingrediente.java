@@ -33,8 +33,8 @@ public class Ingrediente {
     @Column(name = "marca", nullable = false)
     private String marca;
     
-    @Column(name = "precioctual", nullable = true)
-    private float precioctual;
+    @Column(name = "precioactual", nullable = true)
+    private float precioactual;
     
     @Column(name = "escala", nullable = true)
     private String escala;
@@ -84,5 +84,23 @@ public class Ingrediente {
     public void setTipoingrediente(TipoIngrediente tipoingrediente) {
         this.tipoingrediente = tipoingrediente;
     }
+
+    public float getPrecioactual() {
+        return precioactual;
+    }
+
+    public void setPrecioactual(float precioactual) {
+        this.precioactual = precioactual;
+    }
+
+    public String getEscala() {
+        return escala;
+    }
+
+    public void setEscala(String escala) {
+        this.escala = escala;
+    }
+    
+    
       
 }
