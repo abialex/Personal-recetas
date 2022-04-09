@@ -14,38 +14,23 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author USER
+ * @author alexis
  */
 @Entity
-public class Ingrediente {
-    
+public class TipoIngrediente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @JoinColumn(insertable = true,updatable = true,name="idtipoingrediente",nullable = true)
-    @ManyToOne
-    private TipoIngrediente tipoingrediente;
-    
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-    
-    @Column(name = "marca", nullable = false)
-    private String marca;
-    
-    @Column(name = "precioctual", nullable = true)
-    private float precioctual;
-    
-    @Column(name = "escala", nullable = true)
-    private String escala;
 
-    public Ingrediente() {
+    @Column(name = "nombre", nullable = false)
+    private String nombre;      
+
+    public TipoIngrediente() {
     }
 
-    public Ingrediente(int id, String nombre, String marca) {
-        this.id = id;
+    public TipoIngrediente(String nombre) {
         this.nombre = nombre;
-        this.marca = marca;
     }
 
     public int getId() {
@@ -64,25 +49,9 @@ public class Ingrediente {
         this.nombre = nombre;
     }
 
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
     @Override
     public String toString() {
         return nombre;
     }
 
-    public TipoIngrediente getTipoingrediente() {
-        return tipoingrediente;
-    }
-
-    public void setTipoingrediente(TipoIngrediente tipoingrediente) {
-        this.tipoingrediente = tipoingrediente;
-    }
-      
 }
