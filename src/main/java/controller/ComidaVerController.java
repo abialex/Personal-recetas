@@ -10,6 +10,7 @@ import Pdf.HistoriaclinicaSimplepdf;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import controllerPrecio.PrecioVerController;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -288,7 +289,13 @@ public class ComidaVerController implements Initializable {
         ComidaAgregarController oComidaAgregarController = (ComidaAgregarController) mostrarVentana(ComidaAgregarController.class, "ComidaAgregar");
         oComidaAgregarController.setController(odc);
         lockedPantalla();
-
+    }
+    
+    @FXML
+    void mostrarPrecios() {
+        PrecioVerController oPrecioVerController = (PrecioVerController) mostrarVentana(PrecioVerController.class, "PrecioVer");
+        //PrecioVerController.setController(odc);
+      //  lockedPantalla();
     }
 
     public Object mostrarVentana(Class generico, String nameFXML) {

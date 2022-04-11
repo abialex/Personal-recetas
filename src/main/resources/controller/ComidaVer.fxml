@@ -44,7 +44,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseExited="#imagInventoryFuera" onMouseMoved="#imagInventoryMoved" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="53.0" onMouseClicked="#mostrarPrecios" onMouseExited="#imagInventoryFuera" onMouseMoved="#imagInventoryMoved" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../imagenes/inventario-1.png" />
                            </image>

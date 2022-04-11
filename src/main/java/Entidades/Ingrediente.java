@@ -18,32 +18,31 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Ingrediente {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @JoinColumn(insertable = true,updatable = true,name="idtipoingrediente",nullable = true)
+
+    @JoinColumn(insertable = true, updatable = true, name = "idtipoingrediente", nullable = true)
     @ManyToOne
     private TipoIngrediente tipoingrediente;
-    
+
     @Column(name = "nombre", nullable = false)
     private String nombre;
-    
+
     @Column(name = "marca", nullable = false)
     private String marca;
-    
+
     @Column(name = "precioactual", nullable = true)
     private float precioactual;
-    
+
     @Column(name = "escala", nullable = true)
     private String escala;
 
     public Ingrediente() {
     }
 
-    public Ingrediente(int id, String nombre, String marca) {
-        this.id = id;
+    public Ingrediente(String nombre, String marca) {
         this.nombre = nombre;
         this.marca = marca;
     }
@@ -101,6 +100,8 @@ public class Ingrediente {
         this.escala = escala;
     }
     
-    
-      
+    public Ingrediente getIngrediente() {
+        return this;
+    }
+
 }
