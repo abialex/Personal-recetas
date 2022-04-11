@@ -61,7 +61,7 @@
                         </JFXComboBox>
                         <JFXComboBox fx:id="jcbTipo" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Tipo" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets left="5.0" right="5.0" />
+                              <Insets left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </JFXComboBox>
                         <JFXTextField fx:id="jtfNombre" labelFloat="true" promptText="Nombre">
@@ -92,9 +92,6 @@
                            </padding>
                         </JFXComboBox>
                         <JFXTextField fx:id="jtfIngrediente" labelFloat="true" promptText="Ingrediente" GridPane.columnIndex="1">
-                           <padding>
-                              <Insets left="5.0" right="5.0" />
-                           </padding>
                            <GridPane.margin>
                               <Insets bottom="5.0" />
                            </GridPane.margin>
