@@ -27,9 +27,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -38,7 +42,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
@@ -47,6 +54,9 @@ import javafx.util.Callback;
  * @author alexis
  */
 public class PrecioVerController implements Initializable {
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private TableView<Ingrediente> TablePrecio;
@@ -77,6 +87,9 @@ public class PrecioVerController implements Initializable {
 
     ObservableList<Ingrediente> listPrecio = FXCollections.observableArrayList();
     List<Ingrediente> listPrecios;
+    private double x = 0;
+    private double y = 0;
+    PrecioVerController odc = this;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -111,7 +124,7 @@ public class PrecioVerController implements Initializable {
     @FXML
     void updateListPrecio() {
         String tipo = jcbTipoingrediente.getSelectionModel().getSelectedItem().getNombre().equals("NINGUNO") ? "" : "and idtipoingrediente = " + jcbTipoingrediente.getSelectionModel().getSelectedItem().getId();
-        listPrecios = App.jpa.createQuery("select p from Ingrediente p where nombre like " + "'%" + jtfIngrediente.getText() + "%' " + tipo + " order by id DESC").setMaxResults(9).getResultList();
+        listPrecios = App.jpa.createQuery("select p from Ingrediente p where nombre like " + "'%" + jtfIngrediente.getText() + "%' " + tipo + " order by id DESC").setMaxResults(100).getResultList();
         listPrecio.clear();
         for (Ingrediente oIngrediente : listPrecios) {
             listPrecio.add(oIngrediente);
@@ -205,17 +218,16 @@ public class PrecioVerController implements Initializable {
                 }
 
                 void mostrarModificar(MouseEvent event) {
-                    /*
                     ImageView buton = (ImageView) event.getSource();
-                    for (Plato oplato : listPlato) {
-                        if (oplato.getId() == (Integer) buton.getUserData()) {
-                            ComidaModificarController oComidaModificarController = (ComidaModificarController) mostrarVentana(ComidaModificarController.class, "ComidaModificar");
-                            oComidaModificarController.setPlato(oplato);
-                            oComidaModificarController.setController(odc);
+                    for (Ingrediente oIngrediente : listPrecios) {
+                        if (oIngrediente.getId() == (Integer) buton.getUserData()) {
+                            PrecioModificarController oPrecioModificarController = (PrecioModificarController) mostrarVentana(PrecioModificarController.class, "PrecioModificar");
+                            oPrecioModificarController.setIngrediente(oIngrediente);
+                            oPrecioModificarController.setController(odc);
                             lockedPantalla();
                             break;
                         }
-                    }*/
+                    }
                 }
 
                 void mostrarEliminar(MouseEvent event) {
@@ -338,5 +350,46 @@ public class PrecioVerController implements Initializable {
         jtfMarca.setText("");
         //jcbIngrediente se limpia cada vez que cargaIngrediente
 
+    }
+
+    public void lockedPantalla() {
+        if (ap.isDisable()) {
+            ap.setDisable(false);
+        } else {
+            ap.setDisable(true);
+        }
+    }
+
+    public Object mostrarVentana(Class generico, String nameFXML) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(generico.getResource(nameFXML + ".fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(generico.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene scene = new Scene(root);//instancia el controlador (!)
+        scene.getStylesheets().add(generico.getResource("/css/bootstrap3.css").toExternalForm());;
+        Stage stage = new Stage();//creando la base vací
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initOwner(((Stage) ap.getScene().getWindow()));
+        stage.setScene(scene);
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                x = event.getX();
+                y = event.getY();
+            }
+        });
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - x);
+                stage.setY(event.getScreenY() - y);
+            }
+        });
+        stage.show();
+        return loader.getController();
     }
 }
