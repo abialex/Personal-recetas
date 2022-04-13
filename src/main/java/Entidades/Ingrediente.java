@@ -38,6 +38,9 @@ public class Ingrediente {
 
     @Column(name = "escala", nullable = true)
     private String escala;
+    
+    @Column(name = "caracteristica", nullable = true)
+    private String caracteristica;
 
     public Ingrediente() {
     }
@@ -104,4 +107,12 @@ public class Ingrediente {
         return this;
     }
 
+    public String getCaracteristica() {
+        return caracteristica;
+    }
+
+    public void setCaracteristica(String caracteristica) {
+        this.caracteristica = caracteristica;
+    }
+       
 }

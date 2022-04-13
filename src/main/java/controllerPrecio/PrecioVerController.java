@@ -68,10 +68,19 @@ public class PrecioVerController implements Initializable {
     private TableColumn<Ingrediente, String> columnIngrediente;
 
     @FXML
-    private TableColumn<Ingrediente, Ingrediente> columnPrecio;
+    private TableColumn<Ingrediente, Float> columnPrecio;
 
     @FXML
     private TableColumn<Ingrediente, Integer> columnEstado;
+
+    @FXML
+    private TableColumn<Ingrediente, String> columnUnidad;
+
+    @FXML
+    private TableColumn<Ingrediente, String> columnCaracteristica;
+    
+    @FXML
+    private TableColumn<Ingrediente, String> columnMarca;
 
     @FXML
     private JFXComboBox<TipoIngrediente> jcbTipo;
@@ -152,28 +161,12 @@ public class PrecioVerController implements Initializable {
     void initTableView() {
         columnTipo.setCellValueFactory(new PropertyValueFactory<Ingrediente, TipoIngrediente>("tipoingrediente"));
         columnIngrediente.setCellValueFactory(new PropertyValueFactory<Ingrediente, String>("nombre"));
-        columnPrecio.setCellValueFactory(new PropertyValueFactory<Ingrediente, Ingrediente>("ingrediente"));
+        columnPrecio.setCellValueFactory(new PropertyValueFactory<Ingrediente, Float>("precioactual"));
         columnEstado.setCellValueFactory(new PropertyValueFactory<Ingrediente, Integer>("id"));
+        columnUnidad.setCellValueFactory(new PropertyValueFactory<Ingrediente, String>("escala"));
+        columnCaracteristica.setCellValueFactory(new PropertyValueFactory<Ingrediente, String>("caracteristica"));
+        columnMarca.setCellValueFactory(new PropertyValueFactory<Ingrediente, String>("marca"));
 
-        columnPrecio.setCellFactory(column -> {
-            TableCell<Ingrediente, Ingrediente> cell = new TableCell<Ingrediente, Ingrediente>() {
-                @Override
-                protected void updateItem(Ingrediente item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty) {
-                        setGraphic(null);
-                        setText("");
-                    } else {
-                        for (Ingrediente ingrediente : listPrecio) {
-
-                        }
-                        setText(item.getPrecioactual() == 0 ? "Desc." : item.getPrecioactual() + " " + item.getEscala());
-                    }
-                }
-            };
-
-            return cell;
-        });
 
         Callback<TableColumn<Ingrediente, Integer>, TableCell<Ingrediente, Integer>> cellFoctory = (TableColumn<Ingrediente, Integer> param) -> {
             final TableCell<Ingrediente, Integer> cell = new TableCell<Ingrediente, Integer>() {

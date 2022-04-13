@@ -43,7 +43,7 @@ public class PrecioModificarController implements Initializable {
     private JFXTextField jtfNombre;
 
     @FXML
-    private JFXTextField jtfMarca;
+    private JFXTextField jtfMarca, jtfCaracteristica;
 
     PrecioVerController oPrecioVerController;
     Ingrediente oIngrediente;
@@ -92,7 +92,8 @@ public class PrecioModificarController implements Initializable {
             ingrediente.setEscala(jcbEscala.getSelectionModel().getSelectedItem());
             ingrediente.setMarca(jtfMarca.getText());
             ingrediente.setTipoingrediente(jcbTipo.getSelectionModel().getSelectedItem());
-
+            ingrediente.setCaracteristica(jtfCaracteristica.getText());
+            
             App.jpa.getTransaction().begin();
             App.jpa.persist(ingrediente);
             App.jpa.getTransaction().commit();
